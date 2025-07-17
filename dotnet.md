@@ -2,6 +2,7 @@ dotnet new mvc -n TenProject
 dotnet add package Microsoft.EntityFrameworkCore
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 dotnet add package Microsoft.EntityFrameworkCore.Tools
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 
 
 Program.cs
@@ -15,7 +16,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 var app = builder.Build();
 
 "ConnectionStrings": {
-  "DefaultConnection": "Server=.;Database=TenProjectDb;Trusted_Connection=True;"
+  "DefaultConnection": "Server=.;Database=TenProjectDb;Trusted_Connection=True;Trusted_Connection=True;TrustServerCertificate=True;"
 }
 
 
@@ -92,6 +93,8 @@ namespace TenProject.ViewComponents
         <li class="list-group-item">@item.Name</li>
     }
 </ul>
+
+builder.Services.AddScoped<IHospitalRepository, EFHospitalRepository>();
 
 @await Component.InvokeAsync("Category")
 
